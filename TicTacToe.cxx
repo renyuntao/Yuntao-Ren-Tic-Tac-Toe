@@ -70,8 +70,10 @@ int getRandFree(char arr[9])
 		}
 	}
 
-	if(freeSpaceCount == 0)   // No free space
+	// No free space
+	if(freeSpaceCount == 0) 
 		return -1;
+
 	return freeSpace[rand() % freeSpaceCount];
 }
 
@@ -92,10 +94,12 @@ int bestMove(char arr[9])
 		}
 	}
 	
+	// No free space
 	if(!hasFreeSpace)
 		return -1;    // -1 denote has no free space
 
-	int movePoints[9] = {0,};    // Record points
+	// Record points
+	int movePoints[9] = {0,};    
 
 	for(int i = 0; i < TEST_NUM; ++i)
 	{
@@ -106,10 +110,14 @@ int bestMove(char arr[9])
 		while(checkGame(tmp) == MARK_NULL)   //Game has not over
 		{
 			int pos = getRandFree(tmp);
-			if(pos == -1)    // no free space
+			 
+			// No free space
+			if(pos == -1)    
 				break;
+
 			if(firstMove == -1)
 				firstMove = pos;
+
 			tmp[pos] = mark;
 			mark = (mark == COMPUTER_MARK) ? PLAYER1_MARK : COMPUTER_MARK;
 		}
@@ -123,6 +131,7 @@ int bestMove(char arr[9])
 	}
 
 	int maxPoints = 0;
+
 	// Find maximum point
 	for(int j = 0; j < 9; ++j)
 	{
@@ -185,7 +194,10 @@ void playGame1(char arr[],int flag,int step)
 		++flag;
 		cout<<"\n";
 	}
+
 	printBoard(arr);
+
+	// Check who is win
 	if(checkGame(arr) == PLAYER1_MARK)
 		cout<<"Player1 win.\n";
 	else if(checkGame(arr) == COMPUTER_MARK)
@@ -208,7 +220,9 @@ void playGame2(char arr[],int flag,int step)
 			break;
 		printBoard(arr);
 		cout<<"Note: Player1 use '"<<PLAYER1_MARK<<"' and Player2 use '"<<PLAYER2_MARK<<"'\n\n";
-		if(!(flag & 1))   // player1 move
+
+		// when flag is even number,then player1 move
+		if(!(flag & 1))   
 		{
 			cout<<"Player1's select [1-9]:";
 			int select;
@@ -248,7 +262,10 @@ void playGame2(char arr[],int flag,int step)
 		++flag;
 		cout<<"\n";
 	}
+	
 	printBoard(arr);
+
+	// Check who is win
 	if(checkGame(arr) == PLAYER1_MARK)
 		cout<<"Player1 win.\n";
 	else if(checkGame(arr) == PLAYER2_MARK)
@@ -275,6 +292,8 @@ int main()
 {
 	char arr[] = {'.','.','.','.','.','.','.','.','.'};
 	int flag = 0, step = 0;
+
+	// Select the mode 
 	printMode();
 	int choice;
 	cin>>choice;
@@ -284,6 +303,7 @@ int main()
 		cin>>choice;
 	}
 	cout<<endl;
+
 	switch(choice)
 	{
 		case 1:
@@ -293,5 +313,6 @@ int main()
 			playGame2(arr,flag,step);
 			break;
 	}
+
 	return 0;
 }
