@@ -6,4 +6,5 @@ Tish Tic-Tac-Toe game has two mode:
 
 Run the program as       
 
-    $ g++ Tic-Tac-Toe.cxx -o Tic-Tac-Toe && ./Tic-Tac-Toe
+    $ make      
+	$ ./TicTacToe
